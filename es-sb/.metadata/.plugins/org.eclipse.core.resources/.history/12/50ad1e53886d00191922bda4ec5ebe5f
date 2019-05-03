@@ -1,0 +1,36 @@
+package sa.com.is.cyberwatch.web.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.springframework.stereotype.Service;
+
+import sa.com.is.cyberwatch.web.dto.LoginFormDto;
+import sa.com.is.cyberwatch.web.model.Customer;
+import sa.com.is.cyberwatch.web.repository.CustomerRepository;
+
+@Service
+public class CustomerService {
+	
+	private CustomerRepository customerRepository;
+	
+	public CustomerService(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+
+	public Customer getCustomer(LoginFormDto request) {
+		return customerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+	}
+
+	public Customer saveCustomer(Customer request) {
+		return customerRepository.save(request)
+		//return customerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+	}
+	public List<Customer> getAllCustomer() {
+		return StreamSupport
+				.stream(customerRepository.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+	}
+
+}

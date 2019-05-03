@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<style>
+/*******************************
+* MODAL AS LEFT/RIGHT SIDEBAR
+* Add "left" or "right" in modal parent div, after class="modal".
+* Get free snippets on bootpen.com
+*******************************/
+.modal.left .modal-dialog, .modal.right .modal-dialog {
+	position: fixed;
+	margin: auto;
+	width: 320px;
+	height: 100%;
+	-webkit-transform: translate3d(0%, 0, 0);
+	-ms-transform: translate3d(0%, 0, 0);
+	-o-transform: translate3d(0%, 0, 0);
+	transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content, .modal.right .modal-content {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.modal.left .modal-body, .modal.right .modal-body {
+	padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog {
+	left: -320px;
+	-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, left 0.3s ease-out;
+	transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog {
+	left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+	right: -320px;
+	-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, right 0.3s ease-out;
+	transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+	right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-content {
+	border-radius: 0;
+	border: none;
+}
+
+.modal-header {
+	border-bottom-color: #EEEEEE;
+	background-color: #FAFAFA;
+}
+
+/* ----- v CAN BE DELETED v ----- */
+body {
+	background-color: #78909C;
+}
+
+.demo {
+	padding-top: 60px;
+	padding-bottom: 110px;
+}
+
+.btn-demo {
+	margin: 15px;
+	padding: 10px 15px;
+	border-radius: 0;
+	font-size: 16px;
+	background-color: #FFFFFF;
+}
+
+.btn-demo:focus {
+	outline: 0;
+}
+
+.demo-footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 15px;
+	background-color: #212121;
+	text-align: center;
+}
+
+.demo-footer>a {
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 16px;
+	color: #fff;
+}
+</style>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>CyberWatch Customers</title>
+
+<!-- Custom fonts for this template-->
+
+<link href="css/all.min.css" rel="stylesheet"
+	type="text/css"></link>
+	
+
+<!-- Page level plugin CSS-->
+<link href="~/js/dataTables.bootstrap4.css"
+	rel="stylesheet"></link>
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin.css" rel="stylesheet"></link>
+
+</head>
+
+<body id="page-top">
+
+	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+		<a class="navbar-brand mr-1" href="login.html">CyberWatch </a>
+		<!-- Navbar -->
+		<ul class="navbar-nav ml-auto ml-md-0">
+		</ul>
+	</nav>
+
+	<div id="wrapper">
+
+		<div id="content-wrapper">
+
+			<div class="container-fluid">
+
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<h2 align="center">
+							<a href="#">Cyber Watch DashBoard </a>
+						</h2>
+					</li>
+				</ol>
+				<div class="text-right">
+
+					<!-- searching text area -->
+					<div>
+						<form th:action="@{/textsearch}" method="get">
+							<input type="text" name="freeText" placeholder="Enter To Search" />
+							<button class="btn btn-secondary">Search</button>
+						</form>
+						<div>
+							<a class="btn btn-info" th:href="@{/add-feed}">Add New Feed</a>
+						</div>
+					</div>
+					<div class="container demo">
+						<div class="text-center">
+							<button type="button" class="btn btn-demo" data-toggle="modal"
+								data-target="#myModal">Left Sidebar Modal</button>
+
+							<button type="button" class="btn btn-demo" data-toggle="modal"
+								data-target="#myModal2">Right Sidebar Modal</button>
+						</div>
+
+						<!-- Modal -->
+						<div class="modal left fade" id="myModal" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">Left Sidebar</h4>
+									</div>
+
+									<div class="modal-body">
+										<p>Anim pariatur cliche reprehenderit, enim eiusmod high</p>
+									</div>
+
+								</div>
+								<!-- modal-content -->
+							</div>
+							<!-- modal-dialog -->
+						</div>
+						<!-- modal -->
+
+						<!-- Modal -->
+						<div class="modal right fade" id="myModal2" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel2">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
+									</div>
+
+									<div class="modal-body">
+										<p>Anim pariatur cliche reprehenderit, enim eiusmod high
+											life accusamus terry richardson ad squid. 3 wolf moon ....</p>
+									</div>
+
+								</div>
+								<!-- modal-content -->
+							</div>
+							<!-- modal-dialog -->
+						</div>
+						<!-- modal -->
+
+					</div>
+					<!-- container -->
+
+					<div>
+						<!-- DataTables Example -->
+						<div class="card mb-3">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable">
+										<thead>
+											<tr>
+												<th th:if="${#lists.contains(chechkedFields, 'id')}">Id</th>
+												<th th:if="${#lists.contains(chechkedFields, 'firstname')}">First
+													Name</th>
+												<th th:if="${#lists.contains(chechkedFields, 'lastname')}">Last
+													Name</th>
+												<th th:if="${#lists.contains(chechkedFields, 'age')}">Age</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody th:each="feed : ${c}">
+											<tr>
+
+												<!-- <td th:if="${chechkedFields}" th:text="${feed.id}"></td> -->
+												<td th:if="${#lists.contains(chechkedFields, 'id')}"
+													th:text="${feed.id}"></td>
+												<td th:if="${#lists.contains(chechkedFields, 'firstname')}"
+													th:text="${feed.firstname}"></td>
+												<td th:if="${#lists.contains(chechkedFields, 'lastname')}"
+													th:text="${feed.lastname}"></td>
+												<td th:if="${#lists.contains(chechkedFields, 'age')}"
+													th:text="${feed.age}"></td>
+												<td><a th:href="@{/customer/delete/} + ${feed.id}"
+													class="btn btn-danger">Delete</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="card-footer small text-muted">Updated yesterday
+								at 11:59 PM</div>
+						</div>
+
+						<div th:each="c : ${chechkedFields}">
+							<span th:text="${c}"></span>
+						</div>
+
+					</div>
+					<!-- /.container-fluid -->
+
+					<!-- Sticky Footer -->
+					<footer class="sticky-footer">
+						<div class="container my-auto">
+							<div class="copyright text-center my-auto">
+								<span>Copyright © www.cyberwatch.com 2019</span>
+							</div>
+						</div>
+					</footer>
+				</div>
+				<!-- /.content-wrapper -->
+
+			</div>
+		</div>
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Page level plugin JavaScript-->
+	<script src="vendor/chart.js/Chart.min.js"></script>
+	<script src="vendor/datatables/jquery.dataTables.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin.min.js"></script>
+
+	<!-- Demo scripts for this page-->
+	<script src="js/demo/datatables-demo.js"></script>
+	<script src="js/demo/chart-area-demo.js"></script>
+
+	<!--Custom JavaScript -->
+	<script src="/js/custom.min.js"></script>
+
+	<script type="text/javascript">
+		function rowClicked(value) {
+			location.href = "/getall-feeds" + value;
+		}
+	</script>
+
+</body>
+
+</html>

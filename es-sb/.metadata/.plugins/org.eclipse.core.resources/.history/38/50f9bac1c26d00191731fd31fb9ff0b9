@@ -1,0 +1,108 @@
+package sa.com.is.cyberwatch.web.controller;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import sa.com.is.cyberwatch.web.dto.DashboardRequestDto;
+import sa.com.is.cyberwatch.web.dto.LoginFormDto;
+import sa.com.is.cyberwatch.web.model.Customer;
+import sa.com.is.cyberwatch.web.service.CustomerService;
+
+@Controller
+public class CustomerController {
+
+	private CustomerService customerService;
+	private List<String> defaultCheckboxes = Arrays.asList("id", "firstname", "lastname", "age");
+
+	public CustomerController(CustomerService customerService) {
+		super();
+		this.customerService = customerService;
+	}
+
+	@GetMapping("")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("login");
+		mv.addObject("loginForm", new LoginFormDto());
+		return mv;
+	}
+
+	@PostMapping("/loginForm")
+	public ModelAndView login(@ModelAttribute LoginFormDto request) {
+		Customer customer = customerService.getCustomer(request);
+		System.out.println(customer);
+		if (customer == null) {
+			// ToDO: Set error msg in the error page.
+			String message = "User not found.";
+			ModelAndView modelAndView = new ModelAndView("error");
+			modelAndView.addObject("errorMessage", message);
+			return modelAndView;
+		}
+
+		return new ModelAndView("redirect:/dashboard");
+	}
+
+	@GetMapping("/dashboard")
+	public ModelAndView dashboard(DashboardRequestDto request) {
+
+		ModelAndView mv = new ModelAndView("dashboard");
+		List<Customer> customers = new ArrayList<>();
+		if (StringUtils.isEmpty(request.getQ())) {
+			customers = customerService.getAllCustomer();
+		} else {
+			customers = customerService.getByQuery(request.getQ());
+		}
+
+		mv.addObject("c", customers);
+		if (CollectionUtils.isEmpty(request.getCheckbox()))
+			mv.addObject("chechkedFields", defaultCheckboxes);
+		else
+			mv.addObject("chechkedFields", request.getCheckbox());
+		mv.addObject("q", request.getQ());
+		return mv;
+	}
+
+	@GetMapping("/add-feed")
+	public ModelAndView addFeed() {
+		ModelAndView mv = new ModelAndView("add-feed");
+		mv.addObject("addFeed", new Customer());
+		return mv;
+	}
+
+	@PostMapping("/add-feed")
+	public ModelAndView addFeed(Customer customer) {
+		customerService.saveCustomer(customer);
+		ModelAndView mv = new ModelAndView("add-feed");
+		mv.addObject("addFeed", new Customer());
+		return new ModelAndView("redirect:/dashboard");
+	}
+	
+
+	@GetMapping("/customer/delete/{id}")
+    public ModelAndView deleteCustomer(@PathVariable("id") String id) {
+        System.out.println(id);
+       int optionalCustomer = customerService.findById(id);
+        // TODO: Delete the customer with the given id
+        if (optionalCustomer== 0) {
+            // erro page
+        }
+        return new ModelAndView("redirect:/findAll");
+    }
+	
+//to test the view
+	@GetMapping("/test-modal")
+	public ModelAndView testModal() {
+		return new ModelAndView("test-modal");
+	}
+
+}

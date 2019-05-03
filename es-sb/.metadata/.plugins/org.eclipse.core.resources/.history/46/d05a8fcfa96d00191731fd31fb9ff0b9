@@ -1,0 +1,22 @@
+package sa.com.is.cyberwatch.web.dto;
+
+import java.util.List;
+
+public class DashboardRequestDto {
+
+	private String q;
+	private List<String> checkboxes;
+	public String getQ() {
+		return q;
+	}
+	public void setQ(String q) {
+		this.q = q;
+	}
+	public List<String> getCheckboxes() {
+		return checkboxes;
+	}
+	public void setCheckboxes(List<String> checkboxes) {
+		this.checkboxes = checkboxes;
+	}
+	
+}

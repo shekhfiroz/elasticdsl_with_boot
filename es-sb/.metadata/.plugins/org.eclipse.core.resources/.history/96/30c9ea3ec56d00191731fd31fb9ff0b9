@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>CyberWatch Customers</title>
+
+<!-- Custom fonts for this template-->
+<link href="js/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous"></link>
+
+</head>
+
+<body id="page-top">
+	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+		<a class="navbar-brand mr-1" href="login.html">CyberWatch </a>
+		<!-- Navbar -->
+		<ul class="navbar-nav ml-auto ml-md-0">
+		</ul>
+	</nav>
+
+	<div id="wrapper">
+
+		<div id="content-wrapper">
+
+			<div class="container-fluid">
+
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<h2 align="center">
+							<a href="#">Cyber Watch DashBoard </a>
+						</h2>
+					</li>
+				</ol>
+				<div class="text-left">
+
+					<!-- searching text area -->
+					<div>
+
+						<form th:action="@{/dashboard}" method="get">
+							<div th:if="${q}" th:remove="tag">
+								<input type="text" name="q" th:value="${q}" />
+							</div>
+							<div th:unless="${q}" th:remove="tag">
+								<input type="text" name="q" placeholder="Enter Text To Search"/>
+							</div>
+
+							<button class="btn btn-secondary">Search</button>
+						</form>
+
+						<div>
+							<a class="btn btn-info" th:href="@{/add-feed}">Add New Feed</a>
+						</div>
+
+					</div>
+
+					<div class="container demo">
+						<button type="button" class="btn btn-demo" data-toggle="modal"
+							data-target="#myModal2">Select fields</button>
+
+					</div>
+					<!-- container -->
+					<link href="../static/css/sb-admin.css" rel="stylesheet"
+						type="text/css"></link>
+					<!-- Modal -->
+					<div class="modal right fade" id="myModal2" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel2">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="myModalLabel2">Select fields</h4>
+								</div>
+
+								<div class="modal-body">
+									<form action="/dashboard">
+										<input type="checkbox" name="checkbox" value="id">Id<br>
+										<input type="checkbox" name="checkbox" value="firstname">firstname<br>
+										<input type="checkbox" name="checkbox" value="lastname">lastname<br>
+										<input type="checkbox" name="checkbox" value="age">Age<br>
+										<br> <input type="submit" value="Submit">
+									</form>
+								</div>
+
+							</div>
+							<!-- modal-content -->
+						</div>
+						<!-- modal-dialog -->
+					</div>
+					<!-- modal -->
+
+					<div>
+						<!-- DataTables Example -->
+						<div class="card mb-3">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable">
+										<thead>
+											<tr>
+												<th th:if="${#lists.contains(chechkedFields, 'id')}">Id</th>
+												<th th:if="${#lists.contains(chechkedFields, 'firstname')}">First
+													Name</th>
+												<th th:if="${#lists.contains(chechkedFields, 'lastname')}">Last
+													Name</th>
+												<th th:if="${#lists.contains(chechkedFields, 'age')}">Age</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody th:each="feed : ${c}">
+											<tr>
+												<!-- <td th:if="${chechkedFields}" th:text="${feed.id}"></td> -->
+												<td th:if="${#lists.contains(chechkedFields, 'id')}" th:text="${feed.id}"></td>
+												<td th:if="${#lists.contains(chechkedFields, 'firstname')}" th:text="${feed.firstname}"></td>
+												<td th:if="${#lists.contains(chechkedFields, 'lastname')}" th:text="${feed.lastname}"></td>
+												<td th:if="${#lists.contains(chechkedFields, 'age')}" th:text="${feed.age}"></td>
+													<!-- deleting the records-->
+												<td><a th:href="@{/delete} + ${feed.id}" class="btn btn-danger">Delete</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+						</div>
+					</div>
+					<!-- /.container-fluid -->
+
+					<!-- Sticky Footer -->
+					<footer class="sticky-footer">
+						<div class="container my-auto">
+							<div class="copyright text-center my-auto">
+								<span>Copyright © www.cyberwatch.com 2019</span>
+							</div>
+						</div>
+					</footer>
+				</div>
+				<!-- /.content-wrapper -->
+			</div>
+		</div>
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- 	 Bootstrap core JavaScript  -->
+	<script src="js/jquery/jquery.min.js"></script>
+	<script src="js/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="js/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin.min.js"></script>
+
+	<!--Custom JavaScript -->
+	<script src="js/custom.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+</body>
+</html>

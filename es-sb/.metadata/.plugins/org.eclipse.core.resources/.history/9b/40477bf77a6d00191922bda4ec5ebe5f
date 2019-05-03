@@ -1,0 +1,5 @@
+package sa.com.is.cyberwatch.web.dto;
+
+public class AddFeedRequestDto {
+
+}

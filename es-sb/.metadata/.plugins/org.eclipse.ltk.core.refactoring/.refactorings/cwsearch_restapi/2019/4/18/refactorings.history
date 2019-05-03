@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.javatechie.es.api&apos; to &apos;sa.com.is.cyberwatch.restapi&apos;&#x0A;- Original project: &apos;cwsearch_restapi&apos;&#x0A;- Original element: &apos;cwsearch_restapi/src/test/java/com.javatechie.es.api&apos;&#x0A;- Renamed element: &apos;cwsearch_restapi/src/test/java/sa.com.is.cyberwatch.restapi&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.javatechie.es.api&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/test\/java&lt;com.javatechie.es.api" name="sa.com.is.cyberwatch.restapi" qualified="false" references="true" stamp="1556617814044" textual="false" version="1.0"/>
+</session>

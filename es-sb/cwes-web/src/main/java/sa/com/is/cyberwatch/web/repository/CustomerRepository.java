@@ -1,0 +1,19 @@
+package sa.com.is.cyberwatch.web.repository;
+
+import java.util.List;
+
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import sa.com.is.cyberwatch.web.model.Customer;
+
+public interface CustomerRepository extends ElasticsearchRepository<Customer, String> {
+
+	List<Customer> findByFirstname(String firstName);
+
+	List<Customer> findByLastname(String lastName);
+
+	List<Customer> findByAge(String age);
+
+	Customer findByEmailAndPassword(String email, String password);
+
+}

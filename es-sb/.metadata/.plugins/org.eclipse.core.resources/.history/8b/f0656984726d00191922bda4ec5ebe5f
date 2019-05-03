@@ -1,0 +1,7 @@
+package sa.com.is.cyberwatch;
+
+public class LoginFormDto {
+
+	private String email;
+	private String password;
+}

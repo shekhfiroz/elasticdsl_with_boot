@@ -1,0 +1,10 @@
+1556866703390	Rename package 'sa.com.is.cyberwatch.restapi.model'
+1556866714640	Rename package 'sa.com.is.cyberwatch.restapi.repository'
+1556869214518	Extract local variable 'modelAndView'
+1556870783450	Copy file
+1556871007383	Move compilation unit
+1556871485011	Delete element
+1556890113123	Delete element
+1556890129455	Copy file
+1556903179676	Extract local variable 'customer'
+1556903300716	Rename local variable 'optionalCustomer'
